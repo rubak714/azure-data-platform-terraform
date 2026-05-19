@@ -15,17 +15,17 @@
 
 ---
 
-## The scenario
+## ☁️ The scenario
 
-**The company:** BarTech Versicherung GmbH. Fictional. Mid-size German insurer.
+☁️ **The company:** BarTech Versicherung GmbH. Fictional. Mid-size German insurer.
 They are building a new data and AI platform on Azure and need a solid infrastructure foundation before any data pipelines or machine learning workloads can run on top of it.
 
-**The task:** Provision the entire platform foundation with Terraform. No manual portal steps. Everything reproducible, everything auditable, everything deployable from a single pipeline run.
+☁️ **The task:** Provision the entire platform foundation with Terraform. No manual portal steps. Everything reproducible, everything auditable, everything deployable from a single pipeline run.
 
-## The problem with most tutorials
+## ☁️ The problem with most tutorials
 
 Most tutorials show audience how to deploy a storage account or a virtual network in isolation. That is useful for learning individual resources. But it does not teach what happens when those resources need to talk to each other, when a Databricks workspace needs specific subnet delegations, when Key Vault needs RBAC mode or access policies fail silently, when Terraform state gets locked and the pipeline hangs.
 
 This project works through all of that and documents what actually went wrong.
 
-## What gets provisioned
+## ☁️ What gets provisioned
