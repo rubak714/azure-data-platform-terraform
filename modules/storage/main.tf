@@ -58,18 +58,18 @@ resource "azurerm_storage_management_policy" "main" {
 
 resource "azurerm_storage_container" "raw" {
   name                  = "raw"
-  storage_account_id    = azurerm_storage_account.main.id
+  storage_account_name  = azurerm_storage_account.main.name
   container_access_type = "private"
 }
 
 resource "azurerm_storage_container" "processed" {
   name                  = "processed"
-  storage_account_id    = azurerm_storage_account.main.id
+  storage_account_name  = azurerm_storage_account.main.name
   container_access_type = "private"
 }
 
 resource "azurerm_storage_container" "curated" {
   name                  = "curated"
-  storage_account_id    = azurerm_storage_account.main.id
+  storage_account_name  = azurerm_storage_account.main.name
   container_access_type = "private"
 }
