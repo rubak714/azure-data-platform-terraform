@@ -1,4 +1,3 @@
-cat > README.md << 'EOF'
 # Azure Data Platform: Terraform and GitHub Actions
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
