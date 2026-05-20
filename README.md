@@ -176,3 +176,18 @@ Resources were destroyed after verification to avoid ongoing cost.
 The infrastructure can be reprovisioned from scratch with a single
 terraform apply run.
 
+## ☁️ Current status
+
+☁️ Project complete. All modules built, tested, and documented.
+Open issues track potential future improvements.
+
+Feedback and questions are welcome. Open an issue.
+
+---
+
+## ☁️ About
+
+Built as part of a cloud engineering portfolio focused on Azure
+platform engineering, Infrastructure-as-Code, and data platform
+architecture. Currently looking for Cloud Platform Engineer and
+DevOps roles in Germany.
