@@ -29,3 +29,52 @@ Most tutorials show audience how to deploy a storage account or a virtual networ
 This project works through all of that and documents what actually went wrong.
 
 ## ☁️ What gets provisioned
+
+☁️ Everything is deployed to **Germany West Central** inside a single resource group.
+The four core components are:
+
+    GitHub Actions (CI/CD)
+            |
+            v
+    Azure Resource Group: rg-dataplatform-dev-gwc-001
+        |
+        |-- Virtual Network: vnet-dataplatform-dev-gwc-001
+        |       |-- Subnet: snet-dbx-public-001  (Databricks public)
+        |       |-- Subnet: snet-dbx-private-001 (Databricks private)
+        |       |-- NSG: nsg-dataplatform-dev-001
+        |               |-- 3 inbound rules
+        |               |-- 4 outbound rules (required by Databricks)
+        |
+        |-- ADLS Gen2 Storage: stdataplatformrb2026
+        |       |-- Container: raw      (landing zone)
+        |       |-- Container: processed (cleaned data)
+        |       |-- Container: curated  (business-ready data)
+        |       |-- Lifecycle policy: cool tier after 30 days
+        |
+        |-- Key Vault: kv-dataplatform-rb-001
+        |       |-- RBAC authorization mode
+        |       |-- Soft delete: 7 days
+        |       |-- Secret: databricks-pat-token
+        |
+        |-- Databricks Workspace: dbw-dataplatform-dev-gwc-001
+                |-- Trial SKU
+                |-- VNet injection into subnets above
+                |-- No public IP for worker nodes
+
+## ☁️ Project structure
+
+    .
+        modules/
+            networking/     VNet, subnets, NSG with Databricks rules
+            storage/        ADLS Gen2 with medallion architecture
+            keyvault/       Key Vault with RBAC authorization
+            databricks/     Workspace with VNet injection
+        environments/
+            dev/            Entry point wiring all modules together
+        .github/
+            workflows/      CI/CD pipeline: fmt, validate, plan, apply
+        docs/
+            architecture.md     Design decisions and trade-offs
+            TROUBLESHOOTING.md  11 real errors documented with fixes
+        screenshots/
+            Portal evidence of successful provisioning on Azure
