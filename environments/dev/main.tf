@@ -52,11 +52,15 @@ module "databricks" {
   resource_group_name               = module.networking.resource_group_name
   location                          = var.location
   workspace_name                    = var.workspace_name
-  sku                               = "standard"
+  sku                               = "trial"
   vnet_id                           = module.networking.vnet_id
   public_subnet_name                = var.subnet_public_name
   private_subnet_name               = var.subnet_private_name
   public_subnet_nsg_association_id  = module.networking.nsg_id
   private_subnet_nsg_association_id = module.networking.nsg_id
   tags                              = var.tags
+
+  depends_on = [
+    module.networking
+  ]
 }
