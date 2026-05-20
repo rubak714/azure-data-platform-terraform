@@ -58,16 +58,28 @@ resource "azurerm_network_security_group" "main" {
   }
 }
 
-# NOTE: Subnets created without service delegation intentionally at this stage.
-# Databricks VNet injection requires delegation to Microsoft.Databricks/workspaces
-# on both subnets. This will be caught when the Databricks module is added.
-# See TROUBLESHOOTING.md for the full error and fix.
+# FIX: Added service delegation to Microsoft.Databricks/workspaces
+# on both subnets. This was missing in the initial implementation
+# and caused Databricks workspace creation to fail during apply.
+# See TROUBLESHOOTING.md Issue 4 for the full error details.
 
 resource "azurerm_subnet" "public" {
   name                 = var.subnet_public_name
   resource_group_name  = azurerm_resource_group.main.name
   virtual_network_name = azurerm_virtual_network.main.name
   address_prefixes     = [var.subnet_public_prefix]
+
+  delegation {
+    name = "databricks-delegation"
+    service_delegation {
+      name = "Microsoft.Databricks/workspaces"
+      actions = [
+        "Microsoft.Network/virtualNetworks/subnets/join/action",
+        "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
+        "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action"
+      ]
+    }
+  }
 }
 
 resource "azurerm_subnet" "private" {
@@ -75,6 +87,18 @@ resource "azurerm_subnet" "private" {
   resource_group_name  = azurerm_resource_group.main.name
   virtual_network_name = azurerm_virtual_network.main.name
   address_prefixes     = [var.subnet_private_prefix]
+
+  delegation {
+    name = "databricks-delegation"
+    service_delegation {
+      name = "Microsoft.Databricks/workspaces"
+      actions = [
+        "Microsoft.Network/virtualNetworks/subnets/join/action",
+        "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
+        "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action"
+      ]
+    }
+  }
 }
 
 resource "azurerm_subnet_network_security_group_association" "public" {
