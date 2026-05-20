@@ -149,37 +149,31 @@ file or anywhere in the repository.
 ☁️ Rather than just showing the final working code, every non-obvious
 decision and every real error is written up.
 
-☁️ **docs/TROUBLESHOOTING.md** covers 11 real issues encountered during
-the build. Each entry has the exact error message, what caused it,
-the fix applied, and the lesson learned.
+☁️ [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) covers 11 real issues encountered during
+the build. Each entry has the exact error message, what caused it, the fix applied, and the lesson learned.
 
-☁️ **docs/architecture.md** explains every design decision: why VNet
-injection, why RBAC mode for Key Vault, why the medallion architecture
-for storage, what would change in a production deployment.
+☁️ [docs/architecture.md](docs/architecture.md) explains every design decision: why VNet injection, why RBAC mode for Key Vault, why the medallion architecture for storage, what would change in a production deployment.
+
+☁️ [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) covers every command from start to finish with warnings about common failure points discovered during the build.
+
 
 ## ☁️ Deployment results
 
-☁️ All 16 resources were successfully provisioned on Azure in Germany
-West Central. Screenshots of the provisioned infrastructure are in
-the screenshots folder.
+☁️ All 16 resources were successfully provisioned on Azure in Germany West Central. Screenshots of the provisioned infrastructure are in the [screenshots](screenshots/) folder.
 
-☁️ **Databricks workspace URL:**
-adb-7405608226176395.15.azuredatabricks.net
+☁️ The platform was verified running with these outputs after apply:
 
-☁️ **Key Vault URI:**
-https://kv-dataplatform-rb-001.vault.azure.net/
+    Databricks workspace URL : adb-7405608226176395.15.azuredatabricks.net
+    Key Vault URI            : https://kv-dataplatform-rb-001.vault.azure.net/
+    Storage DFS endpoint     : https://stdataplatformrb2026.dfs.core.windows.net/
+    Resource group           : rg-dataplatform-dev-gwc-001
+    VNet                     : vnet-dataplatform-dev-gwc-001
 
-☁️ **Storage DFS endpoint:**
-https://stdataplatformrb2026.dfs.core.windows.net/
-
-Resources were destroyed after verification to avoid ongoing cost.
-The infrastructure can be reprovisioned from scratch with a single
-terraform apply run.
+Resources were destroyed after verification to avoid ongoing cost. These URLs are no longer active. The infrastructure can be reprovisioned from scratch with a single terraform apply run.
 
 ## ☁️ Current status
 
-☁️ Project complete. All modules built, tested, and documented.
-Open issues track potential future improvements.
+☁️ Project complete. All modules built, tested, and documented. Open issues track potential future improvements.
 
 Feedback and questions are welcome. Open an issue.
 
@@ -187,7 +181,4 @@ Feedback and questions are welcome. Open an issue.
 
 ## ☁️ About
 
-Built as part of a cloud engineering portfolio focused on Azure
-platform engineering, Infrastructure-as-Code, and data platform
-architecture. Currently looking for Cloud Platform Engineer and
-DevOps roles in Germany.
+Built as part of a cloud engineering portfolio focused on Azure platform engineering, Infrastructure-as-Code, and data platform architecture. Currently looking for Cloud and IT Infrastructure roles in Germany.
