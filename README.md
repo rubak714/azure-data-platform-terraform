@@ -78,3 +78,69 @@ The four core components are:
             TROUBLESHOOTING.md  11 real errors documented with fixes
         screenshots/
             Portal evidence of successful provisioning on Azure
+
+## ☁️ How the pipeline works
+
+☁️ Every pull request triggers three jobs in sequence:
+
+☁️ **fmt** checks that all Terraform files are properly formatted.
+Fails immediately if anything is off. No exceptions.
+
+☁️ **validate** checks that the configuration is syntactically correct
+and all resource references are valid. Catches errors before they
+reach Azure.
+
+☁️ **plan** runs terraform plan and posts the full output as a comment
+directly on the PR. Reviewers see exactly what will be created,
+changed or destroyed before approving the merge.
+
+☁️ **apply** runs automatically on merge to main. Nothing reaches
+Azure without going through these three jobs first.
+
+Azure credentials are stored as GitHub repository secrets and
+injected at runtime. No credentials are stored in the pipeline
+file or anywhere in the repository.
+
+## ☁️ Requirements
+
+☁️ To deploy this project you need:
+
+- Terraform >= 1.5
+- Azure CLI
+- An Azure subscription
+- A service principal with Contributor and Storage Blob Data
+  Contributor roles on the subscription
+- These GitHub repository secrets configured:
+  - ARM_CLIENT_ID
+  - ARM_CLIENT_SECRET
+  - ARM_TENANT_ID
+  - ARM_SUBSCRIPTION_ID
+- A remote state storage account (see example.tfvars for naming)
+
+## ☁️ Getting started
+
+    # Authenticate with Azure
+    az login
+
+    # Register required resource providers
+    az provider register --namespace Microsoft.Databricks
+    az provider register --namespace Microsoft.Storage
+    az provider register --namespace Microsoft.KeyVault
+    az provider register --namespace Microsoft.Network
+
+    # Copy example vars and fill in your values
+    cd environments/dev
+    cp example.tfvars terraform.tfvars
+
+    # Initialize Terraform
+    terraform init
+
+    # Preview changes
+    terraform plan
+
+    # Apply
+    terraform apply
+
+    # Destroy when done to avoid cost
+    terraform destroy
+
