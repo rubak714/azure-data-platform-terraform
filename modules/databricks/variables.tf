@@ -17,7 +17,7 @@ variable "workspace_name" {
 variable "sku" {
   description = "SKU tier for Databricks workspace. Standard, Premium or Trial"
   type        = string
-  default     = "standard"
+  default     = "trial"
 }
 
 variable "vnet_id" {

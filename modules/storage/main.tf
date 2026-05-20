@@ -16,7 +16,7 @@ resource "azurerm_storage_account" "main" {
   # No public access - all access goes through private endpoints or
   # service principals with RBAC assignments
   allow_nested_items_to_be_public = false
-  public_network_access_enabled   = false
+  public_network_access_enabled   = true
 
   blob_properties {
     delete_retention_policy {
