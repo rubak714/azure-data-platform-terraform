@@ -144,3 +144,35 @@ file or anywhere in the repository.
     # Destroy when done to avoid cost
     terraform destroy
 
+## ☁️ What is documented
+
+☁️ Rather than just showing the final working code, every non-obvious
+decision and every real error is written up.
+
+☁️ **docs/TROUBLESHOOTING.md** covers 11 real issues encountered during
+the build. Each entry has the exact error message, what caused it,
+the fix applied, and the lesson learned.
+
+☁️ **docs/architecture.md** explains every design decision: why VNet
+injection, why RBAC mode for Key Vault, why the medallion architecture
+for storage, what would change in a production deployment.
+
+## ☁️ Deployment results
+
+☁️ All 16 resources were successfully provisioned on Azure in Germany
+West Central. Screenshots of the provisioned infrastructure are in
+the screenshots folder.
+
+☁️ **Databricks workspace URL:**
+adb-7405608226176395.15.azuredatabricks.net
+
+☁️ **Key Vault URI:**
+https://kv-dataplatform-rb-001.vault.azure.net/
+
+☁️ **Storage DFS endpoint:**
+https://stdataplatformrb2026.dfs.core.windows.net/
+
+Resources were destroyed after verification to avoid ongoing cost.
+The infrastructure can be reprovisioned from scratch with a single
+terraform apply run.
+
