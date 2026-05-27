@@ -19,7 +19,7 @@ terraform {
   # Backend configuration for remote state storage
   # Storage account and container must exist before running terraform init
   # Create them manually once or via a bootstrap script
-    backend "azurerm" {
+  backend "azurerm" {
     resource_group_name  = "rg-tfstate-dev-gwc-001"
     storage_account_name = "sttfstategwc2026"
     container_name       = "tfstate"
