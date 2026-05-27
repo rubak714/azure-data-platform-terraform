@@ -99,6 +99,9 @@ jobs:
     needs: validate
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
+    env:
+      TF_VAR_admin_object_id: ${{ secrets.ADMIN_OBJECT_ID }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
