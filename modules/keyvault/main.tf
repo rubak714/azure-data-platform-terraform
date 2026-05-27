@@ -12,7 +12,7 @@ resource "azurerm_key_vault" "main" {
   # RBAC mode means access is controlled via Azure role assignments
   # instead of Key Vault access policies. This is the modern approach
   # and integrates cleanly with Azure AD and least privilege principles.
-  enable_rbac_authorization  = true
+  rbac_authorization_enabled = true
 
   # Soft delete protects against accidental deletion
   # Once enabled this cannot be disabled
