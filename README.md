@@ -79,6 +79,44 @@ The four core components are:
         screenshots/
             Portal evidence of successful provisioning on Azure
 
+## ☁️ Deployment order
+
+The platform is provisioned in the following sequence. Steps 1-3 are manual prerequisites. Steps 4-10 run automatically via Terraform and the CI/CD pipeline.
+
+![Deployment-order](docs/deployment_order.svg)
+
+```
+Step 1 → Azure prerequisites (manual)
+         Subscription, service principal, Contributor + Storage Blob Data Contributor roles
+
+Step 2 → State storage (manual)
+         rg-tfstate resource group, storage account, blob container for tfstate
+
+Step 3 → GitHub secrets (manual)
+         ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_TENANT_ID, ARM_SUBSCRIPTION_ID
+
+Step 4 → terraform init
+         Downloads AzureRM provider, connects to remote state backend
+
+Step 5 → Resource group
+         rg-dataplatform-dev-gwc-001 - container for everything below
+
+Step 6 → Networking module
+         VNet, public + private subnets, NSG, Databricks subnet delegation
+
+Step 7 → Storage + Key Vault (parallel)
+         ADLS Gen2 with medallion containers | Key Vault RBAC mode + PAT secret
+
+Step 8 → Databricks module
+         Workspace with VNet injection, no public IP, depends_on networking
+
+Step 9 → terraform plan
+         CI/CD posts full diff as PR comment before any merge
+
+Step 10 → terraform apply
+          All 16 resources live on Azure in Germany West Central
+```
+
 ## ☁️ How the pipeline works
 
 ☁️ Every pull request triggers three jobs in sequence:
