@@ -101,6 +101,9 @@ jobs:
 
     env:
       TF_VAR_admin_object_id: ${{ secrets.ADMIN_OBJECT_ID }}
+      TF_VAR_storage_account_name: ${{ secrets.STORAGE_ACCOUNT_NAME }}
+      TF_VAR_key_vault_name: ${{ secrets.KEY_VAULT_NAME }}
+      TF_VAR_tenant_id: ${{ secrets.ARM_TENANT_ID }}
 
     steps:
       - name: Checkout repository
