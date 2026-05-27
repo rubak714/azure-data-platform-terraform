@@ -64,7 +64,7 @@ resource "azurerm_network_security_group" "main" {
     access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = "*"
-    destination_port_ranges    = ["443", "3306", "8443", "8444", "8445", "8446", "8447", "8448", "8449", "8450", "8451"]
+    destination_port_ranges    = ["443", "3306", "8443-8451"]
     source_address_prefix      = "VirtualNetwork"
     destination_address_prefix = "AzureDatabricks"
   }
