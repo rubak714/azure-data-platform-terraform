@@ -4,9 +4,13 @@ on:
   push:
     branches:
       - main
+  # AFTER: Only specific paths trigger pipeline
   pull_request:
     branches:
       - main
+    paths:
+      - 'environments/dev/**'
+      - '.github/workflows/terraform.yml'
 
 env:
   TF_WORKING_DIR: environments/dev
@@ -53,6 +57,7 @@ jobs:
 
       - name: Terraform Validate
         run: terraform validate
+        working-directory: ${{ env.TF_WORKING_DIR }}
   plan:
     name: Terraform Plan
     runs-on: ubuntu-latest
@@ -96,6 +101,9 @@ jobs:
   apply:
     name: Terraform Apply
     runs-on: ubuntu-latest
+    environment:
+    name: production
+    approval_environment: required
     needs: validate
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
