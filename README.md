@@ -75,7 +75,7 @@ The four core components are:
             workflows/      CI/CD pipeline: fmt, validate, plan, apply
         docs/
             architecture.md     Design decisions and trade-offs
-            TROUBLESHOOTING.md  19 real errors documented with fixes
+            TROUBLESHOOTING.md  11 real errors documented with fixes
         screenshots/
             Portal evidence of successful provisioning on Azure
 
@@ -187,7 +187,7 @@ file or anywhere in the repository.
 ☁️ Rather than just showing the final working code, every non-obvious
 decision and every real error is written up.
 
-☁️ [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) covers 19 real issues encountered during
+☁️ [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) covers 11 real issues encountered during
 the build. Each entry has the exact error message, what caused it, the fix applied, and the lesson learned.
 
 ☁️ [docs/architecture.md](docs/architecture.md) explains every design decision: why VNet injection, why RBAC mode for Key Vault, why the medallion architecture for storage, what would change in a production deployment.
