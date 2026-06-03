@@ -42,7 +42,7 @@ module "keyvault" {
   key_vault_name             = var.key_vault_name
   tenant_id                  = var.tenant_id
   admin_object_id            = var.admin_object_id
-  soft_delete_retention_days = 7
+  soft_delete_retention_days = 90
   tags                       = var.tags
 }
 

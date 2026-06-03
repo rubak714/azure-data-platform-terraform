@@ -28,7 +28,7 @@ variable "sku_name" {
 variable "soft_delete_retention_days" {
   description = "Number of days to retain soft deleted Key Vault and its contents"
   type        = number
-  default     = 7
+  default     = 90
 }
 
 variable "admin_object_id" {
